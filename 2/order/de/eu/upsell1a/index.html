@@ -1,0 +1,499 @@
+<!DOCTYPE html><html lang="en"><head><base href="/69fe4e4ba709c6f249d61971-preview/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content=""><title>Vital Shoulder Massager</title><link rel="icon" href="favicon.ico" type="image/x-icon"><script>
+sessionStorage.setItem("test", false);
+
+const ALLOWED_AFFILIATE_IDS = [];
+
+let nextPageSlug = null;
+
+function handleUrlParams(params) {
+  const specialParams = ["p_dc", "p_tenbucksoff", "p_freeship", "p_freegift"];
+  const allowedDcValues = ["5", "10", "15", "20", "25"];
+  const currentAffId = params.get("affid") || sessionStorage.getItem("affid");
+  const discountsAllowed =
+    ALLOWED_AFFILIATE_IDS.length === 0 ||
+    (currentAffId !== null && ALLOWED_AFFILIATE_IDS.includes(currentAffId));
+  if (!discountsAllowed) {
+    specialParams.forEach((key) => sessionStorage.removeItem(key));
+  }
+  params.forEach((value, key) => {
+    const paramKey = `p_${key}`;
+    if (specialParams.includes(paramKey)) {
+      if (!discountsAllowed) return;
+      if (paramKey === "p_dc" && !allowedDcValues.includes(value)) return;
+      sessionStorage.setItem(paramKey, value);
+    } else {
+      sessionStorage.setItem(key, value);
+    }
+  });
+}
+
+if (localStorage.getItem('sK_r')) {
+  const cr = JSON.parse(localStorage.getItem('sK_r'));
+  const normalizePath = (rawPath) => {
+    if (!rawPath) return '';
+    try {
+      let p = String(rawPath);
+      p = p.split('?')[0].split('#')[0];
+      p = p.replace(/\/+$/, '');
+      p = p.replace(/\/index.html$/, '');
+      p = p.replace(/^\/+/, ''); p = p.replace(/^69fe4e4ba709c6f249d61971-preview\/?/, '');
+      return p;
+    } catch (e) {
+      console.error('Error normalizing path', e);
+      return '';
+    }
+  };
+  const pathname = window.location.pathname;
+  const cp = normalizePath(pathname || '/');
+  let nr = cr.find((r) => r.page === cp);
+  if (nr) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const baseNext = pathname.endsWith("/index.html") ? nr.next + "/index.html" : nr.next || '';
+    const withQuery = urlParams && urlParams.toString()
+      ? baseNext + '?' + urlParams.toString()
+      : baseNext;
+    nextPageSlug = withQuery && !withQuery.startsWith('/') ? '/69fe4e4ba709c6f249d61971-preview/' + withQuery : withQuery;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      MVMT.init('69fe4e4ba709c6f249d61971')
+      const ctaButtons = document.querySelectorAll("[data-cta-button]");
+      ctaButtons.forEach((button) => {
+        button.href = nextPageSlug;
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          MVMT.track("CTA_CLICK", {
+            page: "VSM - Upsell1a DE",
+            page_type: "Upsell",
+            page_url: window.location.href,
+          });
+          window.location.href = nextPageSlug;
+        });
+      });
+    });
+  }
+  
+}
+
+const route = async () => {
+  if (localStorage.getItem('sK_r')) return JSON.parse(localStorage.getItem('sK_r'));
+  const sessionId = MVMT.getSessionId() || localStorage.getItem("mvmt_session_id") || "";
+  const url = 'https://func-ab-test-events-prod-001.azurewebsites.net/api/checkRoute?id=69fe4e4ba709c6f249d61971&v=177981540597993&sessionId='+sessionId;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Network response was not ok');
+    const data = await response.json();
+    localStorage.setItem('sK_r', JSON.stringify(data));
+    return data;
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+    throw error;
+  }
+}
+const nextPage = async () => {
+  let cr = await route();
+  if (!cr) throw new Error('Route not found');
+  const normalizePath = (rawPath) => {
+    if (!rawPath) return '';
+    try {
+      let p = String(rawPath);
+      p = p.split('?')[0].split('#')[0];
+      p = p.replace(/\/+$/, '');
+      p = p.replace(/\/index.html$/, '');
+      p = p.replace(/^\/+/, ''); p = p.replace(/^69fe4e4ba709c6f249d61971-preview\/?/, '');
+      return p;
+    } catch (e) {
+      console.error('Error normalizing path', e);
+      return '';
+    }
+  };
+  const pathname = window.location.pathname;
+  const cp = normalizePath(pathname || '/');
+  let nr = cr.find((r) => r.page === cp);
+  if (!nr) {
+    try {
+      localStorage.removeItem('sK_r');
+    } catch (e) {
+      // ignore storage errors
+    }
+    cr = await route();
+    if (!cr) return '';
+    nr = cr.find((r) => r.page === cp);
+  }
+  const urlParams = new URLSearchParams(window.location.search);
+  if (!nr) return '';
+  const baseNext = pathname.endsWith("/index.html") ? nr.next + "/index.html" : nr.next || '';
+  const withQuery = urlParams && urlParams.toString()
+    ? baseNext + '?' + urlParams.toString()
+    : baseNext;
+  const absolute = withQuery && !withQuery.startsWith('/') ? '/69fe4e4ba709c6f249d61971-preview/' + withQuery : withQuery;
+  return absolute;
+}
+const urlParams = new URLSearchParams(window.location.search);
+handleUrlParams(urlParams);
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (event) => {
+    const elementClasses = event.target.className;
+    const elementId = event.target.id;
+
+    const windowPosition = window.scrollY;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const elementPosition = event.clientX;
+    const elementTop = event.clientY;
+
+    MVMT.track("PAGE_CLICK", {
+      page: "VSM - Upsell1a DE",
+      page_type: "Upsell",
+      page_url: window.location.href,
+      element_classes: elementClasses,
+      element_id: elementId,
+      window_position: windowPosition,
+      window_width: windowWidth,
+      window_height: windowHeight,
+      element_position: elementPosition,
+      element_top: elementTop,
+    });
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const elementsToHideSelectors = Array.from(params.entries()).reduce((selectors, [key, value]) => {
+      if (value === "n" || value === "none") {
+          selectors.push(`[data-url-param-${key}]`);
+      }
+      return selectors;
+  }, []);
+  if (elementsToHideSelectors.length) {
+      document.querySelectorAll(elementsToHideSelectors.join(",")).forEach(el => el.style.display = "none");
+  }
+  const topBanner = document.querySelector("[data-url-param-colorbanner]");
+  if (topBanner && params.has("colorbanner")) topBanner.style.backgroundColor = params.get("colorbanner") || "red";
+});
+
+const getGlobals = async () => {
+  const response = await fetch("https://stdigitalmvmtprod001.blob.core.windows.net/globals/production/default");
+  const data = await response.json();
+  return data;
+};
+
+document.addEventListener("DOMContentLoaded", async() => {
+
+  if (nextPageSlug === null || nextPageSlug.length === 0) {
+    nextPageSlug = await nextPage();
+    const ctaButtons = document.querySelectorAll("[data-cta-button]");
+    ctaButtons.forEach((button) => {
+      button.href = nextPageSlug;
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        MVMT.track("CTA_CLICK", {
+          page: "VSM - Upsell1a DE",
+          page_type: "Upsell",
+          page_url: window.location.href,
+        });
+        window.location.href = nextPageSlug;
+      });
+    });
+  }
+    
+  const globals = await getGlobals();
+  const globalAttribute = "data-holder-global"
+  const globalElements = document.querySelectorAll(`[${globalAttribute}]`);
+  if (globalElements) {
+    globalElements.forEach((element) => {
+      const data = globals[element.getAttribute(globalAttribute)];
+      element.innerText = data.label;
+      if (data.type === "url") {
+        element.href = data.src;
+      }
+    })
+  }
+
+  // Track all elements with data-sparqcms-component-id on page view
+  const sparqcmsComponentElements = document.querySelectorAll("[data-sparqcms-component-id]");
+  const componentIds = [];
+  sparqcmsComponentElements.forEach(element => {
+    componentIds.push(element.getAttribute("data-sparqcms-component-id"));
+  });
+  
+  if (componentIds.length > 0) {
+      MVMT.track("PAGE_VIEW_COMPONENTS", {
+      page: "VSM - Upsell1a DE",
+      page_type: "Upsell",
+      page_url: window.location.href,
+      component_ids: componentIds
+    });
+  }
+});
+  
+  </script>
+<script>
+  const offerName = 'Vital Shoulder Massager, Vital Shoulder Massager';
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': 'pageView', 
+    'offer': 'Vital Shoulder Massager, Vital Shoulder Massager',
+    'customer_id':sessionStorage.getItem("customerId") || undefined,
+    'page':{
+      'type':'Upsell',
+      'isReload':performance.getEntriesByType("navigation")[0].type === "reload",
+      'isExclude':false
+    },
+    'experiment':{
+      'id':undefined,
+      'name':undefined,
+      'variation':undefined
+    }
+  });
+</script>
+  <link rel="stylesheet" href="styles/upsell1a.css" /><style>@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+</style><style>@layer imported{.font-poppins{
+  font-family: "Poppins", sans-serif;
+}
+.font-raleway{
+  font-family: "Raleway", sans-serif;
+}
+.font-montserrat{
+  font-family: "Montserrat", sans-serif;
+}
+.font-barlow{
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+
+.border-bottom-15 {
+  border-bottom-left-radius: 14.72px;
+  border-bottom-right-radius: 14.72px;
+}
+
+.badge{
+            position: absolute;
+            top: -13px;
+            right: 8px;
+            background-image: url(https://stdigitalmvmtprod001.blob.core.windows.net/assets/develop/ewmflqwfmnioqwunfk123jnfikj12nirj1294.svg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            padding: 4px 6px 16px;
+          width: fit-content !important;
+        }
+        .badge > p{
+            margin: 0;
+            font-size: 21px;
+            color: #FFF;
+            line-height: 22px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+.pulse {
+     animation-name: pulse;
+     -webkit-animation-name: pulse;
+     animation-duration: 1.5s;
+     -webkit-animation-duration: 1.5s;
+     animation-iteration-count: infinite;
+     -webkit-animation-iteration-count: infinite;
+}
+ @keyframes pulse {
+     0% {
+         transform: scale(0.85);
+    }
+     50% {
+         transform: scale(1);
+    }
+     100% {
+         transform: scale(0.85);
+    }
+}
+ @-webkit-keyframes pulse {
+     0% {
+         -webkit-transform: scale(0.85);
+    }
+     50% {
+         -webkit-transform: scale(1);
+    }
+     100% {
+         -webkit-transform: scale(0.85);
+    }
+}
+@media(max-width: 920px) {
+  .header-upsell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: fit-content;
+  }
+
+  .badge {
+    top: -10px;
+    padding: 4px 3px 16px;
+  }
+
+  .header-upsell>img:last-of-type {
+    object-fit: contain;
+  }
+  .badge > p{
+    font-size: 16px;
+  }
+}}</style><style>@layer imported{.strike {
+  text-decoration: line-through;
+  text-decoration-color: #444444;
+}}</style><style>@layer imported{html body [data-holder="product_name"] {
+    font-family: "Barlow Semi Condensed", sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}}</style></head><body><div><div><header class="header-upsell c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-i9vfpo cgbp4ft c-b1p5ui c-crbsvi ctduf03 c-evftdq c-aojzn2 c-4aoy6u c-k1hfkf c-y4jqk0 cx8yn36"><link rel="preload" as="image" href="assets/vft-logo-main.png"/><img src="assets/vft-logo-main.png" alt="Image header" class="c2poant ciytyod c-d7jzl0 c-4au6wl ceuu77c cv4ctcs" id="1" loading="eager"/><link rel="preload" as="image" href="assets/page-upsell-step-2-specialoffer.png"/><img src="assets/page-upsell-step-2-specialoffer.png" alt="Image header" class="c-i9vfpo cix23zl ciojc72 cfkv5u2 cq10fwz c6yq6k4 ch5zwyo c-xxqnew cln9np9" id="4" loading="eager"/></header><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-3n63zq c-b1u9qq c5mbwf c-fhfxhv relative" data-zRv82="zRv82"><span class="font-raleway c7hj9q8 c-bu2rzl cybkfeg ccjwpg7 c-n92bdn c-l08hdi">HURRY—Don't Miss Your BONUS OFFER!</span><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera ch5lc3u cwtaoij c-mb61ox c-aks0up cnvd1uz c7e7cj7 c-6s4sku c1l0cnl c9dzewq" data_products=""><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-6q9rwv cfvwpbu cs4gvzf c-aop3ja c-b1tmr7 c-i9vfpo c-evftdq cxoenjx c-4aoy6u c-jfh54d"><link rel="preload" as="image" href="assets/warning.png"/><img src="assets/warning.png" class="c-i7kkdb cix3sj2 c-d7jzl0 c7fi21l cxa9clk" loading="eager"/><span class="font-barlow c-n92bdn cybjsex ckd1ou4 cwz7wfk">Offer will expire when the window is closed.</span></div><span id="p-xm9MSqT9kEVBCW5ZfHa" class="c-n92bdn cgevsei c-jp40lq"><div class="c-lc9846 c-cvr7xx c-rri4mx cevei02 c-5pdfmv c-a4oera c-xw6n1r cybkfeg c-aop3ja c-b1u9qq c-crbsvi ctduf03 cruts0f c-evftdq c-be57w5"><span id="MygqvbqnLupktdeehIJSO" class="font-montserrat c-cvr7xx c-lsq09 cybkfeg c-yegw0y cesh73q c-lhdxov">TODAY ONLY:</span><span id="MygqvbqnLupktdeehIJSO" class="font-montserrat c-cvr7xx c-lsq09 cybkfeg c-yegw0y cesh73q c-lhdxov">Get</span><span id="YpTjGl6ZjsDXGx-ATSLme" class="font-montserrat c-cvr7xx c-lsq09 cybkfeg c-r0vjpo cesh73q c-lhdxov">Vital Shoulder Massager</span><span id="4vKgyt8dK5nbza3xoxYQi" class="font-montserrat c-cvr7xx c-lsq09 cybkfeg c-yegw0y cesh73q c-lhdxov">for just</span><span id="4vKgyt8dK5nbza3xoxYQi" class="font-montserrat c-cvr7xx c-lsq09 cybkfeg c7hj9q8 c-lhdxov">$67.49!</span></div></span><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c-5pdfmv c-a4oera c-iwza5u c-mb44qc cmpatwk ce5vqi6 c-aop3ja c-crbsvi ctduf03 c-v0br6m c-b1u9qq c-4au6wl c8qfco" data_products="" data-product-card-1="product_id"><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c-5pdfmv c-42cdjk c-i9vfpo c-aolwln c-b1r2t3"><span class="font-barlow c-n92bdn cey0ojg c-mdsko cybkfeg">EXCLUSIVE VIP OFFER</span></div><div class="border-bottom-15 c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-i9vfpo ciusx6p c-crbsvi ctduf03 cz02kxo"><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-i9vfpo c-hou3zo c-aop3ja c-b1u9qq" data-shippable-product-id="1935" data-product-id="1942" data-product-quantity="1" data-shipping-profile-id="3" data-custom-summary-row="4"><span class="font-barlow cmyac1f cybkfeg c-mtr8v crtxbpl cyx7lv7 chdmgbj cxg9itr">1x Vital Shoulder Massager</span><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera cybkfeg c-r09u5q c-aop3ja c-b1u9qq c-crbsvi ctduf03"><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">$179.97 value</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-i9vfpo c-hou3zo c-aop3ja c-b1u9qq"><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-crbsvi c-aop3ja c-b1u9qq"><span class="font-barlow c-n92bdn cybjsex crtxbpl c-cvr7xx cxg9itr">1x VIP Customer Perks</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-i9vfpo c-hou3zo c-aop3ja c-b1u9qq"><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-ldkgy6 cun148d c-aop3ja c-b1u9qq"><img src="assets/184_10656.svg" class="c-i8o5k1 c-lkq7ui c-d7jzl0" id="4" loading="lazy"/><span class="font-barlow c-n92bdn cxg9itr">Free Monthly Products</span></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-r09u5q cybkfeg c-aop3ja c-b1u9qq c-crbsvi ctduf03"><span class="font-barlow c-n92bdn" data-holder="currency">$</span><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">49.00</span><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">&nbsp;value</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-i9vfpo c-hou3zo c-aop3ja c-b1u9qq"><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-ldkgy6 c-aop3ja c-b1u9qq"><img src="assets/184_10655.svg" class="c-i8o5k1 cjmgjye c-d7jzl0" id="4" loading="lazy"/><span class="font-barlow c-n92bdn cxg9itr">50% Off Select Products</span></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-r09u5q cybkfeg c-aop3ja c-b1u9qq c-crbsvi ctduf03"><span class="font-barlow c-n92bdn" data-holder="currency">$</span><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">24.99</span><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">&nbsp;value</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-i9vfpo c-hou3zo c-aop3ja c-b1u9qq"><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-ldkgy6 c-aop3ja c-b1u9qq"><img src="assets/184_10655.svg" class="c-i8o5k1 cjmgjye c-d7jzl0" id="4" loading="lazy"/><span class="font-barlow c-n92bdn cxg9itr">Free Expedited Shipping</span></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-r09u5q cybkfeg c-aop3ja c-b1u9qq c-crbsvi ctduf03"><span class="font-barlow c-n92bdn" data-holder="currency">$</span><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">9.95</span><span class="font-barlow c-n92bdn cybkfeg c-r09u5q cxg9itr">&nbsp;value</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-aojzn2 c-b1p5ui cun148d ctduf03 c-i9vfpo c2u2kz6 c-jp5aks"><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03"><span class="font-barlow c-n92bdn" data-holder="currency">$</span><span class="font-barlow c-n92bdn" data_holder="product_final_price">24.99</span></div><span class="font-barlow c-n92bdn">&nbsp;monthly. No Obligation. Cancel Anytime.</span></div></div><div id="JcaMA3oOZ16wKJVh1fVKd" class="badge font-barlow cck0jdd cwmj2v9 cixntjj c-cr7yyc ctdy8x9 c-6s3ils c1l1mmn"><p id="A26DjJ8b0N2RzU0CdCFNa" class="c-mtr8v cxo9jnp cs0hvft cesdd6k cybjsex c-jp2qmo">SAVE</p><p id="xb1SIOGv66W1phLe4migL" class="c-mtr8v cybjsex c-2hyrnl cx9l33i c-jp2qmo">$100</p></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-hlnvma c-v0br6m c-iwza5u cwtaoij cnvd1uz ccjwpg7 c8qfco"><span class="font-montserrat c-n92bdn c2v526o cybkfeg">Only 8 Vital Shoulder Massagers left!</span><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-3n63zq c-b1u9qq ctduf03 c-crbsvi c-aop3ja cb2yb9t"><span class="font-montserrat c-n92bdn cybkfeg c-mb8mk ckd1ou4" data-timer="">09:59</span><span class="font-montserrat c-n92bdn cybkfeg c-mb8mk ckd1ou4">MINUTES</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-i9vfpo c-evftdq c-6q9rwv cnvgvs5 cck0jdd c49eq3z c-6s5fkd c1kzpo2 c8qfco"><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-6do06y c5d39l4 c-cgq3v2 c8n7oc c-6s5fkd"><span class="font-montserrat c-n92bdn ckd1ou4 cybjsex">Retail Price:</span><div class="strike c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-lqt1o ckd1ou4 cybkfeg c-aop3ja c-b1u9qq c-crbsvi ctduf03"><span class="font-montserrat c-n92bdn" data-holder="currency">$</span><span class="font-montserrat c-n92bdn c-lqt1o cybkfeg ckd1ou4 c-4aoy6u c-tqu0hl">179.97</span></div></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c8n7oc c1kzpo2"><span class="font-montserrat c-n92bdn ckd1ou4 cybjsex">Offer Price:</span><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c7l9c6s c-a4oera c-lqt1o c-ykmh5z cybkfeg c-crbsvi c-aop3ja c-b1u9qq"><span class="font-montserrat c-n92bdn" data-holder="currency">$</span><span class="font-montserrat c-n92bdn c-lqt1o cybkfeg c-ykmh5z">67.49</span></div></div></div><button class="pulse c-lc9846 c-oaxxat cevei02 c-rri4mx cpf2v2a c-jaytv5 c-sc1q4l c-z1rj74 ccdkvsh cgt2htg cwzv3pd cey0ojg cmpdduo ch8wzy4 c-i9vfpo c-evftdq c7l9c6s c-4au6wl c-z3x91n c-mb6oog c8q8of" data-submit-button="" data-product-id="26" data-product-quantity="1" data-shipping-profile-id="3" data-custom-summary-row="5"><span class="font-poppins c-m9yni cey0ojg c-v947c4 cybkfeg">Complete My Order</span></button></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera cnxk88f ccm3vtn"><a class="font-poppins c-n92bdn c-mdsko cybj5fe chlmbyd c-yq8lw3 cyvf0zv" data-decline-button="">No thanks, I don't want this great offer</a></div><div class="c-lc9846 c-o6hhdg c-rri4mx cxpk1f6 c-5pdfmv c-a4oera c-i86k2d cfxwihl cnby850 ciwhsh3 cr8hj7x corctar c-mb61ox c-v76y7t c-n92bdn c-ic30jh c-lbx363 c5g4gle c-468i9h cnkzvdv c-1vttgr c-y2u18x c8q8of c-6s13s8 c-w92kqn c-17s8oo cms8v4l c570edc cfr8k07 c9e0l6b c-wjyd2k cppen2d c-1sbp6k c52ugyh cokimws ctlu5ap" data-cookie-banner=""><span class="cybjsex c-b1u9qq cq10fwz c-i9vfpo c-mb8mk">We value your privacy</span><span class="c-mtr8v"><div>By clicking “Accept,” you agree to our Terms of Use and our Privacy Policy. Clicking “Accept” means you consent to the use of cookies and similar tracking technologies to, among other things, serve you relevant ads ourselves or through our third-party ad partners with whom data from cookies is shared</div></span><div class="c-lc9846 c-oaxxat c-rri4mx cevei02 c-a4oera cruvoz0 c-b1u9qq c-crbsvi c-aop3ja c-ch8uwh c-i9vfpo c-evftdq" data-cookie-btns=""><button class="c-lc9846 c-oaxxat cxpk1f6 c-rri4mx c-3n4ynq c-jaytv5 c-sc1q4l c-z1rj74 ccdkvsh c-2hf5cf cu8uuf8 cz02kxo c-63hydz c-mb4rpv c-tij0or c-evftdq"><span class="">Customize</span></button><button class="c-lc9846 c-oaxxat cxpk1f6 c-rri4mx c-3n4ynq c-jaytv5 c-sc1q4l c-z1rj74 ccdkvsh c-2hf5cf cu8uuf8 cz02kxo c-63hydz c-tij0or c-mb4rpv c-evftdq"><span class="">Accept All</span></button><button class="c-lc9846 c-oaxxat cxpk1f6 c-rri4mx c1mdae7 c-jaytv5 c-sc1q4l ccdkvsh c-2hf5cf cu8uuf8 cey0ojg c-63hydz c-z1rj74 c-evftdq"><span class="">Reject All</span></button></div></div><img src="assets/page_upsell_bg.png" width="1920" height="800" alt="" style='position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;' loading="eager" /></div></div></div><script src="https://stdigitalmvmtprod001.blob.core.windows.net/libs/mvmt-latest.prod.js.min.js"></script><script src="scripts/upsell1a.js"></script><script src="scripts/pageBuilder/page/upsell/upsell.js"></script><script>function parseTimeString(timeStr) {
+    const parts = timeStr.split(":").map(Number);
+    if (parts.length === 3) {
+        const [h, m, s] = parts;
+        return h * 3600 + m * 60 + s;
+    } else if (parts.length === 2) {
+        const [m, s] = parts;
+        return m * 60 + s;
+    }
+    return 0;
+}
+
+function formatTime(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    if (h > 0) {
+        return `${String(h).padStart(2, "0")}:${String(m).padStart(
+            2,
+            "0"
+        )}:${String(s).padStart(2, "0")}`;
+    } else {
+        return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+}
+
+function startFomoTimers() {
+    const timerElements = document.querySelectorAll("[data-timer]");
+
+    timerElements.forEach((el) => {
+        let timeLeft = parseTimeString(el.textContent.trim());
+
+        if (timeLeft <= 0) return;
+
+        const interval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                el.textContent = "00:00";
+                el.classList.add("expired"); // Optional: mark as expired
+                return;
+            }
+
+            timeLeft--;
+            el.textContent = formatTime(timeLeft);
+        }, 1000);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", startFomoTimers);
+</script>
+<script type="application/json" id="page-config">
+{
+  "campaignId": "333",
+  "pageType": "Upsell",
+  "funnelId": "69fe4e4ba709c6f249d61971",
+  "locale": "DE"
+}
+</script>
+
+<script>
+(function () {
+  function parseTimeString(timeStr) {
+    var parts = timeStr.split(":").map(Number);
+    if (parts.length === 3) {
+      var h = parts[0], m = parts[1], s = parts[2];
+      return h * 3600 + m * 60 + s;
+    } else if (parts.length === 2) {
+      var m = parts[0], s = parts[1];
+      return m * 60 + s;
+    }
+    return 0;
+  }
+
+  function formatTime(seconds) {
+    var h = Math.floor(seconds / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+    var s = seconds % 60;
+    var pad = function (n) { return String(n).padStart(2, "0"); };
+    if (h > 0) {
+      return pad(h) + ":" + pad(m) + ":" + pad(s);
+    }
+    return pad(m) + ":" + pad(s);
+  }
+
+  function startFomoTimers() {
+    var timerElements = document.querySelectorAll("[data-timer]:not([data-fomo-timer-init])");
+    timerElements.forEach(function (el) {
+      if (el.hasAttribute("data-fomo-timer-init")) return;
+      var timeLeft = parseTimeString(el.textContent.trim());
+      if (timeLeft <= 0) return;
+      el.setAttribute("data-fomo-timer-init", "");
+      var interval = setInterval(function () {
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          el.textContent = "00:00";
+          el.classList.add("expired");
+          return;
+        }
+        timeLeft--;
+        el.textContent = formatTime(timeLeft);
+      }, 1000);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", startFomoTimers);
+})();
+</script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const cookiesBanner = document.querySelector("[data-cookie-banner]");
+        const cookieAcceptButton = document.querySelector("[data-cookie-accept-button]");
+        const cookieRejectButton = document.querySelector("[data-cookie-reject-button]");
+
+        if (!(cookiesBanner && cookieAcceptButton && cookieRejectButton)) return;
+
+        const cookieDependentScripts = [];
+        const cookiesAnswer = sessionStorage.getItem("cookiesAnswer");
+
+        if (cookiesAnswer === "accepted" || cookiesAnswer === "rejected") {
+          cookiesBanner.style.display = "none";
+          injectTrackingScripts();
+        } else {
+          cookiesBanner.style.display = "flex";
+        }
+
+        cookieAcceptButton.addEventListener("click", () => {
+          sessionStorage.setItem("cookiesAnswer", "accepted");
+          cookiesBanner.style.display = "none";
+          if (cookieDependentScripts.length > 0) injectTrackingScripts()
+        });
+
+        cookieRejectButton.addEventListener("click", () => {
+          sessionStorage.setItem("cookiesAnswer", "rejected");
+          cookiesBanner.style.display = "none";
+        });
+
+        function injectTrackingScripts() {
+          cookieDependentScripts.forEach((script) => {
+            if (script.src) {
+              const scriptElement = document.createElement("script");
+              scriptElement.src = script.src;
+              scriptElement.async = true;
+              document.head.appendChild(scriptElement);
+            } else if (script.text) {
+              const scriptElement = document.createElement("script")
+              scriptElement.innerHTML = script.text;
+              document.head.appendChild(scriptElement);
+            }
+          })
+        }
+      }, 500);
+    });
+  </script>
+  </body></html>
