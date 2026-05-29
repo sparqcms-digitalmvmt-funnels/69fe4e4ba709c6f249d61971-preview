@@ -77,7 +77,7 @@ if (localStorage.getItem('sK_r')) {
 const route = async () => {
   if (localStorage.getItem('sK_r')) return JSON.parse(localStorage.getItem('sK_r'));
   const sessionId = MVMT.getSessionId() || localStorage.getItem("mvmt_session_id") || "";
-  const url = 'https://func-ab-test-events-prod-001.azurewebsites.net/api/checkRoute?id=69fe4e4ba709c6f249d61971&v=178008920103587&sessionId='+sessionId;
+  const url = 'https://func-ab-test-events-prod-001.azurewebsites.net/api/checkRoute?id=69fe4e4ba709c6f249d61971&v=178008954025928&sessionId='+sessionId;
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error('Network response was not ok');
@@ -4019,31 +4019,7 @@ h3.nw-txt, .grp-bx-text1, label.expship.ml-0.mb-0 {
             false
           >
             Deutschland
-          </option></select><div id="1KH9DO36qoHVAo-rlnuNi" class="floating-label"><span id="DO_H5xxMyphrEVPf4Sav5" class="">Land</span></div></div></div></div></div><div id="address" class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c-5pdfmv c-a4oera c-i9vfpo c-crbsvi ctduf03 c-b1u9qq cmyac1f c-6s5fkd c1kzpo2 c-ohjtqh ckyhy7i"><span class="sfProText c-n92bdn cybkfeg c-mt49c cpf4zja">Versandinformationen eingeben</span><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c-5pdfmv c-a4oera c-i9vfpo c-crbsvi cb3kfe6 ctduf03 c-b1u9qq c-6s5fkd c1kzpo2 ckyhy7i c-ohjtqh cx5rxpp cw9t7qw"><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-b1u9qq c-aop3ja c-crbsvi ctduf03 cxoddkv c-i9vfpo"><select class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" autoComplete="address-level2" name="shippingState"><option
-            value=""
-            key=""
-            false
-          >
-            Adressart auswählen
-          </option>,<option
-            value=""
-            key=""
-            false
-          >
-            Privat
-          </option>,<option
-            value=""
-            key=""
-            false
-          >
-            Geschäftlich
-          </option>,<option
-            value=""
-            key=""
-            false
-          >
-            Nicht angegeben
-          </option></select></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="Straße und Nummer" autoComplete="address-line1" data-line-1="" name="shippingAddress1"/></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="Zusatzadresse (Optional)" data-line-2="data-line-2" name="shippingAddress2"/></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="PLZ" autoComplete="postal-code" data-zip-code="" maxlength="5" name="shippingZip"/></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="Ort" autoComplete="address-level2" data-city="" name="shippingCity"/></div><div class="floating-field c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><select class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" autoComplete="country" data-select-countries="" name="shippingCountry"><option
+          </option></select><div id="1KH9DO36qoHVAo-rlnuNi" class="floating-label"><span id="DO_H5xxMyphrEVPf4Sav5" class="">Land</span></div></div></div></div></div><div id="address" class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c-5pdfmv c-a4oera c-i9vfpo c-crbsvi ctduf03 c-b1u9qq cmyac1f c-6s5fkd c1kzpo2 c-ohjtqh ckyhy7i"><span class="sfProText c-n92bdn cybkfeg c-mt49c cpf4zja">Versandinformationen eingeben</span><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c-5pdfmv c-a4oera c-i9vfpo c-crbsvi cb3kfe6 ctduf03 c-b1u9qq c-6s5fkd c1kzpo2 ckyhy7i c-ohjtqh cx5rxpp cw9t7qw"><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="Straße und Nummer" autoComplete="address-line1" data-line-1="" name="shippingAddress1"/></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="Zusatzadresse (Optional)" data-line-2="data-line-2" name="shippingAddress2"/></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="PLZ" autoComplete="postal-code" data-zip-code="" maxlength="5" name="shippingZip"/></div><div class="c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><input class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" placeholder="Ort" autoComplete="address-level2" data-city="" name="shippingCity"/></div><div class="floating-field c-lc9846 c-oaxxat c-rri4mx cxpk1f6 c7l9c6s c-a4oera c-aop3ja c-b1u9qq c-crbsvi ctduf03 cxoddkv c-i9vfpo"><select class="c-i9vfpo c-u6bap8 c-pzcuxk cuo370x c-cgp2b4 c-mb61ox c-63hydz cf4pxvt cxoddkv" autoComplete="country" data-select-countries="" name="shippingCountry"><option
             value="US"
             key="US"
             false
