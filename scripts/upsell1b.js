@@ -96,7 +96,8 @@ const i18n = {
     "id": 79,
     "name": "Germany",
     "iso_2": "DE",
-    "iso_3": "DEU"
+    "iso_3": "DEU",
+    "displayName": "Deutschland"
   },
   "pricingText": {
     "off": "RABATT",
@@ -188,7 +189,7 @@ function formatDateByConvention(year, month, day) {
 const PAYMENT_METHODS_IDS = {"creditCard":1,"googlePay":3,"applePay":4,"paypal":6,"klarna":12};
 const CAMPAIGN_ID = vrioCampaignId;
 const INTEGRATION_ID = integrationId;
-const UPSELL_NEXT_PAGE_SLUG = "2/order/de/eu/upsell2";
+const UPSELL_NEXT_PAGE_SLUG = "2/order/de/eu/thank-you";
 
 function getNextPageSlugForRedirect() {
   const normalize = (value) => {
@@ -198,7 +199,7 @@ function getNextPageSlugForRedirect() {
   if (UPSELL_NEXT_PAGE_SLUG) return normalize(UPSELL_NEXT_PAGE_SLUG);
   return "/";
 }
-const HAS_FOLLOWING_UPSELLS = true;
+const HAS_FOLLOWING_UPSELLS = false;
 const UPSELL_WALLETS_CONFIG = {"enabled":false,"enableApplePay":false,"enableGooglePay":false,"enableKlarna":false};
 const isKlarnaSelected = ({ walletsConfig } = {}) => {
   if (walletsConfig && typeof walletsConfig === "object") {
@@ -322,7 +323,7 @@ const getPrices = async function upsellGetPrices(allPrices) {
 
   return selectedProduct;
 };
-const prices = [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":24.99,"shippable":false,"fullPrice":24.99,"finalPrice":24.99,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Vital Shoulder Massager","id":1936,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"2x Vital Shoulder Massager","id":1937,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"3x Vital Shoulder Massager","id":1938,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"4x Vital Shoulder Massager","id":1939,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"4x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Porch Pirate - Guarantee","id":2052,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Porch Pirate - Guarantee","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1942,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1943,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager   Journey Package Protection","id":1941,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager   Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager - 3 Year Warranty","id":1940,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager - 3 Year Warranty","discountAmount":0,"discountPercentage":0}];
+const prices = [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":24.99,"shippable":false,"fullPrice":24.99,"finalPrice":24.99,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Vital Shoulder Massager","id":1936,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"2x Vital Shoulder Massager","id":1937,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"3x Vital Shoulder Massager","id":1938,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"4x Vital Shoulder Massager","id":1939,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"4x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Porch Pirate - Guarantee","id":2052,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Porch Pirate - Guarantee","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1942,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1943,"quantity":1,"price":0,"shippable":false,"fullPrice":34.79,"finalPrice":34.79,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager   Journey Package Protection","id":1941,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager   Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager - 3 Year Warranty","id":1940,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager - 3 Year Warranty","discountAmount":0,"discountPercentage":0}];
 const shippables = [{"id":1935,"name":"Vital Shoulder Massager"}];
 
 function removeObjectUndefinedProperties(obj) {
@@ -576,6 +577,257 @@ const runDeclineFlow = async ({ isAutoSkip = false } = {}) => {
 };
 
 
+const extractKlarnaLivemode = (gatewayResponseText) => {
+  try {
+    const gatewayData = JSON.parse(gatewayResponseText);
+    const entry = Array.isArray(gatewayData) ? gatewayData[0] : gatewayData;
+    if (entry && entry.livemode !== undefined) return entry.livemode;
+  } catch (error) {
+    console.error("Error extracting Klarna livemode", error);
+  }
+  return undefined;
+}
+const processAndRedirectToKlarna = async (orderId, redirectUrl) => {
+  if (isTest) console.log("Klarna: processing order", orderId);
+
+  const orderData = JSON.parse(sessionStorage.getItem("orderData") || "null") || {};
+  const merchantId = orderData?.merchant_id ?? orderData?.merchantId ?? null;
+  const finalRedirectUrl = redirectUrl || window.location.href;
+
+  const processResponse = await fetch(
+    `https://app-cms-api-proxy-prod-001.azurewebsites.net/vrio/orders/${orderId}/process`,
+    {
+      method: "POST",
+      headers: {
+        authorization: `appkey ${INTEGRATION_ID}`,
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify({
+        redirect_url: finalRedirectUrl,
+        payment_method_id: 12,
+        ...(merchantId ? { merchant_id: merchantId } : {})
+      })
+    }
+  );
+
+  const processResult = await processResponse.json();
+
+  if (isTest) console.log("Klarna process response:", processResult);
+
+  if (
+    !processResponse.ok ||
+    (processResult && processResult.error) ||
+    !processResult.post_data
+  ) {
+    const code = processResult?.error?.code || processResult?.code || null;
+    const msg =
+      (processResult && processResult.error && processResult.error.message) ||
+      (processResult && processResult.message) ||
+      i18n.errors.systemErrorGeneric;
+    const error = new Error(msg);
+    error.code = code;
+    if (processResult?.error) {
+      error.error = processResult.error;
+    }
+    throw error;
+  }
+
+  const livemode = extractKlarnaLivemode(processResult.gateway_response_text);
+  if (livemode !== undefined) {
+    sessionStorage.setItem("klarna_livemode", JSON.stringify(livemode));
+  }
+
+  window.location.href = processResult.post_data;
+}
+async function returnKlarna() {
+  const params = getParams();
+  const paymentIntent = params.get("payment_intent");
+  const orderId = sessionStorage.getItem("cms_oid");
+
+  if (!paymentIntent) return;
+
+  const preload = document.querySelector("[data-preloader]");
+  if (preload) preload.style.display = "flex";
+
+  if (!orderId) {
+    console.error("Klarna return: no order ID found in sessionStorage");
+    if (preload) preload.style.display = "none";
+    showError(i18n.errors.orderNotFound);
+    return;
+  }
+
+  const orderData = JSON.parse(sessionStorage.getItem("orderData") || "null") || {};
+  const merchantId = orderData?.merchant_id ?? orderData?.merchantId ?? null;
+
+  try {
+    const response = await fetch(
+      `https://app-cms-api-proxy-prod-001.azurewebsites.net/vrio/orders/${orderId}/complete`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `appkey ${INTEGRATION_ID}`,
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({
+          transaction_token: paymentIntent,
+          ...(merchantId ? { merchant_id: merchantId } : {})
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (isTest && window.location.hostname === "localhost") {
+      console.log("Klarna complete response:", result);
+    }
+
+    let isLive = extractKlarnaLivemode(result.gateway_response_text);
+    if (isLive === undefined) {
+      const stored = sessionStorage.getItem("klarna_livemode");
+      isLive = stored !== null ? JSON.parse(stored) : true;
+    }
+
+    const resultOrderId = result.order_id || orderId;
+
+    if (result.success) {
+      if (isLive === false) await flagOrderAsTest(resultOrderId);
+
+      sessionStorage.removeItem("cart_token");
+      sessionStorage.removeItem("klarna_livemode");
+      sessionStorage.setItem("cms_oid", resultOrderId);
+      sessionStorage.setItem("orderids", JSON.stringify([resultOrderId]));
+      MVMT.track("ORDER_SUCCESS", {
+        page: "VSM - Upsell1b",
+        page_type: "Downsell",
+        page_url: window.location.href,
+        order_data: orderData,
+        response: result,
+      });
+      try {
+        sendTransactionToDataLayer(vrioToTransaction(result), "Klarna");
+      } catch (e) {
+        console.warn("Klarna: could not send transaction to data layer", e);
+      }
+      try {
+        if (typeof validateAndSendToKlaviyo === "function") {
+          const klaviyoPostOrderData = {
+            ...orderData,
+            vrio_order_id: resultOrderId,
+            vrio_response_status: "success",
+          };
+          await validateAndSendToKlaviyo(
+            klaviyoPostOrderData,
+            "Order Success - VRIO Confirmation",
+            "order"
+          );
+        }
+      } catch (error) {
+        console.error("Error sending transaction to data layer", error);
+      }
+      try {
+        if (typeof sendKlaviyoOrderEvents === 'function') {
+          await sendKlaviyoOrderEvents(orderData, result, true);
+        }
+      } catch (error) {
+        console.error("Error sending order events to Klaviyo", error);
+      }
+      const redirectSlug =
+        typeof nextPageSlug === "string" && nextPageSlug.length > 0
+          ? nextPageSlug.startsWith("/")
+            ? nextPageSlug
+            : "/" + nextPageSlug
+          : "/";
+      window.location.href = redirectSlug;
+    } else {
+      if (!isLive) await flagOrderAsTest(resultOrderId);
+
+      if (isTest) console.error("Klarna complete error:", result);
+      const msg =
+        (result && result.error && result.error.message) ||
+        (result && result.message) ||
+        i18n.errors.klarnaCompletionFailed;
+      if (window.MVMT) {
+        MVMT.track("ORDER_ERROR", {
+          page: "VSM - Upsell1b",
+          page_type: "Downsell",
+          page_url: window.location.href,
+          order_data: orderData,
+          response: result,
+        });
+      }
+      if (preload) preload.style.display = "none";
+      showError(msg);
+    }
+  } catch (error) {
+    if (isTest) console.error("Klarna complete error:", error);
+    const storedLive = sessionStorage.getItem("klarna_livemode");
+    if (storedLive !== null && JSON.parse(storedLive) === false) {
+      await flagOrderAsTest(orderId);
+    }
+    if (window.MVMT) {
+      MVMT.track("ORDER_ERROR", {
+        page: "VSM - Upsell1b",
+        page_type: "Downsell",
+        page_url: window.location.href,
+        order_data: orderData,
+        error: error.message || error,
+      });
+    }
+    if (preload) preload.style.display = "none";
+    showError(i18n.errors.unexpectedError);
+  }
+}
+
+const declineKlarnaUpsell = async () => {
+  if (!isKlarnaPayment) {
+    showErrorAndRedirect(
+      "Klarna is not available",
+      "checkout"
+    );
+    return;
+  }
+  setUpsellButtonsDisabled(true);
+
+  const preload = document.querySelector("[data-preloader]");
+    if (preload) preload.style.display = "flex";
+  const errorEl = document.querySelector("[data-general-error]");
+  if (errorEl) {
+    errorEl.style.display = "none";
+    errorEl.innerText = "";
+  }
+  try {
+    const lastOrderId = sessionStorage.getItem("cms_oid");
+    if (!lastOrderId) {
+      throw new Error("No order ID found in session");
+    }
+
+    if (isTest)
+      console.log(
+        "Klarna: declining upsell, processing order without new offers",
+        lastOrderId
+      );
+
+    await processAndRedirectToKlarna(lastOrderId, removeKlarnaParamsFromUrl());
+  } catch (error) {
+    console.error(error);
+    if (isOrderAlreadyCompletedError(error)) {
+      showErrorAndRedirect(
+        error?.message ||
+          i18n.errors.orderAlreadyCompleteRedirect,
+        "nextPage"
+      );
+      return;
+    }
+    showErrorAndRedirect(
+      error.message || i18n.errors.unexpectedErrorRedirect,
+      "checkout"
+    );
+  } finally {
+    if (preload) preload.style.display = "none";
+    setUpsellButtonsDisabled(false);
+  }
+};
+
 
 const processKlarnaUpsell = async () => {
   if (!isKlarnaPayment) {
@@ -679,7 +931,7 @@ const processKlarnaUpsell = async () => {
         body: JSON.stringify({
           offers: offers.map((o) => JSON.stringify(o)),
           order_id: lastOrderId,
-          pageId: "PTLroe34cIB_zDAHNQ75MbHzjrMbASl6Ghi7QEiLkNjDlRiE_eBV2IHZeyoep1v5"
+          pageId: "W3IQmkAGQPXFY0aSqyoG_FT80nWcFQAkao-d4XMqmUBVU8Q3nKU138rvS84cy442"
         })
       }
     );
@@ -759,7 +1011,7 @@ const processUpsell = async () => {
   }
   try {
     const orderData = JSON.parse(sessionStorage.getItem("orderData"));
-    orderData.pageId = "PTLroe34cIB_zDAHNQ75MbHzjrMbASl6Ghi7QEiLkNjDlRiE_eBV2IHZeyoep1v5";
+    orderData.pageId = "W3IQmkAGQPXFY0aSqyoG_FT80nWcFQAkao-d4XMqmUBVU8Q3nKU138rvS84cy442";
     const lastOrderId = sessionStorage.getItem("cms_oid");
     const stripePayment = JSON.parse(sessionStorage.getItem("stripePayment"));
     const isStripeTestOrder = stripePayment && !stripePayment.isLive;
@@ -1058,6 +1310,14 @@ if (typeof validateAndSendToKlaviyo === "function") {
     screen.style.display = "flex";
   }
   
+  if (isKlarnaPayment) {
+    setUpsellButtonsDisabled(true);
+    try {
+      await returnKlarna();
+    } finally {
+      setUpsellButtonsDisabled(false);
+    }
+  }
   applyKlarnaVisibility();
 
   if (shouldAutoSkip && !isKlarnaReturnFlow) {

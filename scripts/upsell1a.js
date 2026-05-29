@@ -96,7 +96,8 @@ const i18n = {
     "id": 79,
     "name": "Germany",
     "iso_2": "DE",
-    "iso_3": "DEU"
+    "iso_3": "DEU",
+    "displayName": "Deutschland"
   },
   "pricingText": {
     "off": "RABATT",
@@ -322,7 +323,7 @@ const getPrices = async function upsellGetPrices(allPrices) {
 
   return selectedProduct;
 };
-const prices = [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":24.99,"shippable":false,"fullPrice":24.99,"finalPrice":24.99,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Vital Shoulder Massager","id":1936,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"2x Vital Shoulder Massager","id":1937,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"3x Vital Shoulder Massager","id":1938,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"4x Vital Shoulder Massager","id":1939,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"4x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Porch Pirate - Guarantee","id":2052,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Porch Pirate - Guarantee","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1942,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1943,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager   Journey Package Protection","id":1941,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager   Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager - 3 Year Warranty","id":1940,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager - 3 Year Warranty","discountAmount":0,"discountPercentage":0}];
+const prices = [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":24.99,"shippable":false,"fullPrice":24.99,"finalPrice":24.99,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Vital Shoulder Massager","id":1936,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"2x Vital Shoulder Massager","id":1937,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"3x Vital Shoulder Massager","id":1938,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"4x Vital Shoulder Massager","id":1939,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"4x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Porch Pirate - Guarantee","id":2052,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Porch Pirate - Guarantee","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1942,"quantity":1,"price":0,"shippable":false,"fullPrice":43.49,"finalPrice":43.49,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1943,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager   Journey Package Protection","id":1941,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager   Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager - 3 Year Warranty","id":1940,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager - 3 Year Warranty","discountAmount":0,"discountPercentage":0}];
 const shippables = [{"id":1935,"name":"Vital Shoulder Massager"}];
 
 function removeObjectUndefinedProperties(obj) {
@@ -561,7 +562,7 @@ function showErrorAndRedirect(msg, redirectTarget = "checkout") {
 const runDeclineFlow = async ({ isAutoSkip = false } = {}) => {
   if (!isAutoSkip) {
    MVMT.track("CTA_CLICK", {
-    page: "VSM - Upsell1a DE",
+    page: "VSM - Upsell1a - DE",
     page_type: "Upsell",
     page_url: window.location.href
   });
@@ -655,14 +656,14 @@ const processKlarnaUpsell = async () => {
       });
 
     MVMT.track("UPSELL_SUBMITTED", {
-      page: "VSM - Upsell1a DE",
+      page: "VSM - Upsell1a - DE",
       page_type: "Upsell",
       page_url: window.location.href,
       order_id: lastOrderId,
       offers
     });
     MVMT.track("CTA_CLICK", {
-      page: "VSM - Upsell1a DE",
+      page: "VSM - Upsell1a - DE",
       page_type: "Upsell",
       page_url: window.location.href
     });
@@ -679,7 +680,7 @@ const processKlarnaUpsell = async () => {
         body: JSON.stringify({
           offers: offers.map((o) => JSON.stringify(o)),
           order_id: lastOrderId,
-          pageId: "2U46aB2sXz1kuwK-9m-x9LTAU6mHT9T1os5yHnbUSHAlVCWQVWjsf_5f6tJbZ_zd"
+          pageId: "ZMeAaLWbWs_xunjA6sWupMuUdjIhkvLeZIinXvE5tF5x8ViAUDDjrB8-3eMxe2qA"
         })
       }
     );
@@ -759,7 +760,7 @@ const processUpsell = async () => {
   }
   try {
     const orderData = JSON.parse(sessionStorage.getItem("orderData"));
-    orderData.pageId = "2U46aB2sXz1kuwK-9m-x9LTAU6mHT9T1os5yHnbUSHAlVCWQVWjsf_5f6tJbZ_zd";
+    orderData.pageId = "ZMeAaLWbWs_xunjA6sWupMuUdjIhkvLeZIinXvE5tF5x8ViAUDDjrB8-3eMxe2qA";
     const lastOrderId = sessionStorage.getItem("cms_oid");
     const stripePayment = JSON.parse(sessionStorage.getItem("stripePayment"));
     const isStripeTestOrder = stripePayment && !stripePayment.isLive;
@@ -825,7 +826,7 @@ const processUpsell = async () => {
 
     if (isTest) console.log("Sending upsell to VRIO", orderData);
     MVMT.track("UPSELL_SUBMITTED", {
-      page: "VSM - Upsell1a DE",
+      page: "VSM - Upsell1a - DE",
       page_type: "Upsell",
       page_url: window.location.href,
       order_data: orderData,
@@ -864,7 +865,7 @@ const processUpsell = async () => {
       }
       if (window.MVMT) {
         MVMT.track("UPSELL_ERROR", {
-          page: "VSM - Upsell1a DE",
+          page: "VSM - Upsell1a - DE",
           page_type: "Upsell",
           page_url: window.location.href,
           order_data: orderData
@@ -888,7 +889,7 @@ const processUpsell = async () => {
         showToast(msg);
       }
       MVMT.track("UPSELL_ERROR", {
-        page: "VSM - Upsell1a DE",
+        page: "VSM - Upsell1a - DE",
         page_type: "Upsell",
         page_url: window.location.href,
         order_data: orderData,
@@ -897,13 +898,13 @@ const processUpsell = async () => {
     }
 
     MVMT.track("UPSELL_SUCCESS", {
-      page: "VSM - Upsell1a DE",
+      page: "VSM - Upsell1a - DE",
       page_type: "Upsell",
       page_url: window.location.href,
       order_data: orderData,
     });
     MVMT.track("CTA_CLICK", {
-      page: "VSM - Upsell1a DE",
+      page: "VSM - Upsell1a - DE",
       page_type: "Upsell",
       page_url: window.location.href,
     });
@@ -1043,7 +1044,7 @@ if (typeof validateAndSendToKlaviyo === "function") {
       message: "Klaviyo lifecycle: page ready",
       runId: "initial",
       hypothesisId: "KlaviyoLifecycle",
-      data: { pageName: "VSM - Upsell1a DE", pageType: "Upsell" },
+      data: { pageName: "VSM - Upsell1a - DE", pageType: "Upsell" },
     };
     if (klaviyoDebugEnabled && typeof console !== "undefined" && console.log) {
       console.log("[Klaviyo lifecycle] page_ready " + JSON.stringify(pageReadyPayload.data));

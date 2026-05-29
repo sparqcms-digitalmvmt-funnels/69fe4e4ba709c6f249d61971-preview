@@ -92,7 +92,8 @@ const i18n = {
     "id": 79,
     "name": "Germany",
     "iso_2": "DE",
-    "iso_3": "DEU"
+    "iso_3": "DEU",
+    "displayName": "Deutschland"
   },
   "pricingText": {
     "off": "RABATT",
@@ -308,7 +309,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const endpoint =
     `orders?order_id=${orderids.join(",")}` +
-    `&with=order_offers,customer_address_billing,customer_address_shipping,customer,transactions,cart&pageId=S5_XYU0q8wQUnnjdTbJenoTjgX3rtBsYdKQBRR8aCfcMdnOLF8zkHE4MKKQs4uvS`
+    `&with=order_offers,customer_address_billing,customer_address_shipping,customer,transactions,cart&pageId=a9HRDhd09wGV2KH2qzjcklcbqw8Xc1CFTh3zIL2zvXO5d0Nw8GTYjCIA8xdwpTwm`
 
   const response = await fetch(
     `https://app-cms-api-proxy-prod-001.azurewebsites.net/vrio/${endpoint}`,

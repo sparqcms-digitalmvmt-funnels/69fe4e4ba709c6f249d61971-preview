@@ -186,7 +186,8 @@ const i18n = {
     "id": 79,
     "name": "Germany",
     "iso_2": "DE",
-    "iso_3": "DEU"
+    "iso_3": "DEU",
+    "displayName": "Deutschland"
   },
   "pricingText": {
     "off": "RABATT",
@@ -345,7 +346,7 @@ const getVrioOfferIdByProductId = (productId) =>
 sessionStorage.setItem("integrationId", INTEGRATION_ID);
 
 const getPrices = () => {
-  return [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":24.99,"shippable":false,"fullPrice":24.99,"finalPrice":24.99,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Vital Shoulder Massager","id":1936,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"2x Vital Shoulder Massager","id":1937,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"3x Vital Shoulder Massager","id":1938,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"4x Vital Shoulder Massager","id":1939,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"4x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Porch Pirate - Guarantee","id":2052,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Porch Pirate - Guarantee","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1942,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1943,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager   Journey Package Protection","id":1941,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager   Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager - 3 Year Warranty","id":1940,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Vital Shoulder Massager - 3 Year Warranty","discountAmount":0,"discountPercentage":0}]
+  return [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":24.99,"shippable":false,"fullPrice":24.99,"finalPrice":24.99,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Vital Shoulder Massager","id":1936,"quantity":1,"price":0,"shippable":false,"fullPrice":52.19,"finalPrice":52.19,"productName":"1x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"2x Vital Shoulder Massager","id":1937,"quantity":1,"price":0,"shippable":false,"fullPrice":86.99,"finalPrice":86.99,"productName":"2x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"3x Vital Shoulder Massager","id":1938,"quantity":1,"price":0,"shippable":false,"fullPrice":113.09,"finalPrice":113.09,"productName":"3x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"4x Vital Shoulder Massager","id":1939,"quantity":1,"price":0,"shippable":false,"fullPrice":130.49,"finalPrice":130.49,"productName":"4x Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Porch Pirate - Guarantee","id":2052,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Porch Pirate - Guarantee","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1942,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Vital Shoulder Massager","id":1943,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Vital Shoulder Massager","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager   Journey Package Protection","id":1941,"quantity":1,"price":0,"shippable":false,"fullPrice":3.05,"finalPrice":3.05,"productName":"Vital Shoulder Massager   Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Vital Shoulder Massager - 3 Year Warranty","id":1940,"quantity":1,"price":0,"shippable":false,"fullPrice":8.66,"finalPrice":8.66,"productName":"Vital Shoulder Massager - 3 Year Warranty","discountAmount":0,"discountPercentage":0}]
 };
 
 const SUPPORTED_ADDRESS_COUNTRIES = [{"name":"United States of America","iso_2":"US"},{"name":"Canada","iso_2":"CA"},{"name":"United Kingdom","iso_2":"GB"},{"name":"Australia","iso_2":"AU"},{"name":"Germany","iso_2":"DE"},{"name":"France","iso_2":"FR"},{"name":"Spain","iso_2":"ES"},{"name":"Italy","iso_2":"IT"}];
@@ -357,7 +358,15 @@ const getCountries = () => {
   const rawCampaignCountries = Array.isArray(campaignInfo.countries) && campaignInfo.countries.length > 0
     ? campaignInfo.countries
     : null;
-  if (!rawCampaignCountries) return SUPPORTED_ADDRESS_COUNTRIES;
+
+  const applyDisplayName = (country) => {
+    if (country.iso_2 === i18n.fallbackCountry.iso_2 && i18n.fallbackCountry.displayName) {
+      return { ...country, name: i18n.fallbackCountry.displayName };
+    }
+    return country;
+  };
+
+  if (!rawCampaignCountries) return SUPPORTED_ADDRESS_COUNTRIES.map(applyDisplayName);
   const campaignFiltered = rawCampaignCountries
     .map((c) => ({
       ...c,
@@ -366,11 +375,10 @@ const getCountries = () => {
     }))
     .filter((c) => c.iso_2 && SUPPORTED_ADDRESS_COUNTRIES.some((s) => s.iso_2 === c.iso_2))
     .map((c) => {
-      // Prefer the canonical name from SUPPORTED_ADDRESS_COUNTRIES if campaign entry lacks one
       const canonical = SUPPORTED_ADDRESS_COUNTRIES.find((s) => s.iso_2 === c.iso_2);
-      return { ...c, name: c.name || canonical?.name || c.iso_2 };
+      return applyDisplayName({ ...c, name: c.name || canonical?.name || c.iso_2 });
     });
-  return campaignFiltered.length ? campaignFiltered : SUPPORTED_ADDRESS_COUNTRIES;
+  return campaignFiltered.length ? campaignFiltered : SUPPORTED_ADDRESS_COUNTRIES.map(applyDisplayName);
 };
 
 const countries = getCountries();
@@ -619,7 +627,7 @@ async function createOrderViaWallet(confirmationToken, paymentMethodId) {
         ?.getAttribute("data-shipping-profile-id") || undefined;
 
   const orderData = {
-    pageId: "Aw66iXxXS808GM8eV1q-hXVPShXbkgV4b0Np9FtgHxYVQew6EMoD9JgpotpefnJQ",
+    pageId: "1S8ZFgcSWmmT60x28Bxhs8r-4th1dMqbYcvkpMBKIgrx3GjrDI10Ga85M6gYkDPB",
     action: "process",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1,
@@ -1417,7 +1425,7 @@ async function createOrderViaPaypal(isExpress = false) {
   const shippingProfileId = +document.querySelector(`[data-product-id="${selectedProduct.id}"]`)?.getAttribute('data-shipping-profile-id') || undefined;
   const sameAddress = isSameAddress();
   const orderData = {
-    pageId: "Aw66iXxXS808GM8eV1q-hXVPShXbkgV4b0Np9FtgHxYVQew6EMoD9JgpotpefnJQ",
+    pageId: "1S8ZFgcSWmmT60x28Bxhs8r-4th1dMqbYcvkpMBKIgrx3GjrDI10Ga85M6gYkDPB",
     action: "process",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1, // VRIO URL ending /connection
@@ -1717,7 +1725,7 @@ async function createOrderViaKlarna() {
   const sameAddress = isSameAddress();
 
   const orderData = {
-    pageId: "Aw66iXxXS808GM8eV1q-hXVPShXbkgV4b0Np9FtgHxYVQew6EMoD9JgpotpefnJQ",
+    pageId: "1S8ZFgcSWmmT60x28Bxhs8r-4th1dMqbYcvkpMBKIgrx3GjrDI10Ga85M6gYkDPB",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1,
     email: email,
@@ -2096,7 +2104,7 @@ async function createOrderViaCreditCard() {
   let orderTotal = Math.max(0, Number(selectedProduct.price) * selectedProduct.quantity);
 
   const orderData = {
-    pageId: "Aw66iXxXS808GM8eV1q-hXVPShXbkgV4b0Np9FtgHxYVQew6EMoD9JgpotpefnJQ",
+    pageId: "1S8ZFgcSWmmT60x28Bxhs8r-4th1dMqbYcvkpMBKIgrx3GjrDI10Ga85M6gYkDPB",
     action: "process",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1, // VRIO URL ending /connection
@@ -2950,7 +2958,7 @@ if (typeof validateAndSendToKlaviyo === "function") {
       var regionNames = null;
       try { regionNames = new Intl.DisplayNames([PHONE_LOCALE_MAP[i18n.iso2] || LOCALE], { type: 'region' }); } catch {}
       var phoneI18n = Object.fromEntries(
-        getCountries().map((c) => [
+        countries.map((c) => [
           c.iso_2.toLowerCase(),
           (regionNames ? regionNames.of(c.iso_2) : null) || c.name || c.iso_2,
         ])
@@ -2962,7 +2970,7 @@ if (typeof validateAndSendToKlaviyo === "function") {
         initialCountry: i18n.phoneInitialCountry,
         strictMode: false,
         onlyCountries: (
-          getCountries()
+          countries
         ).map((c) => c.iso_2.toLowerCase()),
         i18n: phoneI18n,
       });
@@ -4371,7 +4379,7 @@ async function returnPaypal() {
 ;
 
     const body = {
-        pageId: "Aw66iXxXS808GM8eV1q-hXVPShXbkgV4b0Np9FtgHxYVQew6EMoD9JgpotpefnJQ",
+        pageId: "1S8ZFgcSWmmT60x28Bxhs8r-4th1dMqbYcvkpMBKIgrx3GjrDI10Ga85M6gYkDPB",
         action: "process",
         campaign_id: CAMPAIGN_ID,
         connection_id: 1,
